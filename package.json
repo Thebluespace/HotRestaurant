@@ -12,6 +12,15 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "express": "^4.16.3",
-    "path": "^0.12.7"
-  }
+    "path": "^0.12.7",
+    "r": "0.0.5"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Thebluespace/HotRestaurant.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Thebluespace/HotRestaurant/issues"
+  },
+  "homepage": "https://github.com/Thebluespace/HotRestaurant#readme"
 }
