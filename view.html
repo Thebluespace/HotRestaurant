@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Tables Page</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div class="jumbotron">
+            <h1 class="display-4">Hot Restuarant</h1>
+            <p class="lead"></p>
+            <hr class="my-4">
+            <p>Current Reservations and Waiting list.</p>
+            <a class="btn btn-danger btn-lg" id="newRes" href="/add" role="button">Make Reservation</a>
+            <a class="btn btn-default" href="/"><i class="fas fa-home"></i></a>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Current Reservations</h2>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title"></h5>Currently Seated</h5>
+                    <ul id="tableList">
+                    </ul>
+                
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <h2>Waiting List</h2>
+            </div>
+            <div class="card-body">
+                <h5 class="card-title">Currently Waiting</h5>
+                    <ul id="waitingList">
+                        
+                    </ul>
+                
+            </div>
+        </div>
+    </div>
+    <footer>
+        <center>
+            <a href="/api/view">API Table Link</a> |
+            <a href="#">Table Has Set Rotation</a>
+        </center>
+
+    </footer>
+</body>
+<script>
+    $.get("/api/tablestatus", data => {
+        console.log(data);
+        var seated = data.seated;
+        var waiting = data.waiting;
+        console.log(seated,waiting)
+        var i = 0;
+        seated.forEach(item => {
+            i++;
+            var tableList = $("#tableList");
+            var listItem = $("<li class='list-group-item mt-4'>");
+            listItem.append(
+                $("<h2>").text("Table #" + (i)),
+                $("<hr>"),
+                // $("<h2>").text("ID: " + item[i].name),
+                $("<h2>").text("Name: " + item.name),
+                $("<h2>").text("Email: " + item.email),
+                $("<h2>").text("Phone: " + item.phone)
+            );
+            tableList.append(listItem);
+        });
+        i = 0;
+        seated.forEach(item => {
+            i++;
+            var tableList = $("#waitingList");
+            var listItem = $("<li class='list-group-item mt-4'>");
+            listItem.append(
+                $("<h2>").text("Table #" + (i)),
+                $("<hr>"),
+                //$("<h2>").text("ID: " + item[i].customerID),
+                $("<h2>").text("Name: " + item.name),
+                $("<h2>").text("Email: " + item.email),
+                $("<h2>").text("Phone: " + item.phone)
+            );
+            tableList.append(listItem);
+        });
+    });
+</script>
+</html>
